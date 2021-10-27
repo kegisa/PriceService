@@ -1,0 +1,28 @@
+POST http://localhost:8039/price
+Content-Type: application/json
+
+{
+  "ticker" : "SBSP",
+  "price": 100.0,
+  "currency" : "RUB"
+}
+
+###
+POST http://localhost:8039/price
+Content-Type: application/json
+
+{
+  "ticker" : "FXCN",
+  "price": 10.0,
+  "currency" : "RUB"
+}
+
+###
+POST http://localhost:8039/price
+Content-Type: application/json
+
+{
+  "ticker" : "YNDX",
+  "price": 200.0,
+  "currency" : "RUB"
+}
