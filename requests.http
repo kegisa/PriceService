@@ -3,4 +3,7 @@
 GET http://localhost:8039/price/SBSP
 
 ###
-GET http://localhost:8039/price
+POST http://localhost:8039/price/getByTickers
+Content-Type: application/json
+
+{"tickers" : ["FXCN", "SBSP"]}
