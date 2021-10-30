@@ -38,12 +38,14 @@ public class StockPriceService {
         List<Stock> stocks = new ArrayList<>();
         List<String> figiList = figiesDto.getFigies();
 
+        log.info("Getting from Redis {}", figiList);
         stockRepository.findAllById(figiList).forEach(i -> stocks.add(i));
 
         figiList.removeAll(stocks.stream().map(m -> m.getFigi()).collect(Collectors.toList()));
         if(!figiList.isEmpty()) {
-            log.debug("Go to get from TinkoffService {}" , figiList);
+            log.info("Getting from TinkoffService {}" , figiList);
             List<Stock> figiPriceFromTinkoff = tinkoffPriceService.getPricesByFigies(figiList);
+            log.info("Save to Redis {}", figiPriceFromTinkoff);
             stockRepository.saveAll(figiPriceFromTinkoff);
             stocks.addAll(figiPriceFromTinkoff);
         }
