@@ -1,15 +1,15 @@
 server:
-  port: 8039
+  port: 8002
 
 spring:
   redis:
     host: localhost
-    port: 6379
+    port: 8003
     database: 0
 
 logging:
   file:
     path: logs/PriceService.log
   level:
-    root: DEBUG
+    root: INFO
 
