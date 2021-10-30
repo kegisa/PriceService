@@ -3,9 +3,9 @@ server:
 
 spring:
   redis:
-    host: localhost
-    port: 8003
-    database: 0
+    host: 34.88.24.200
+    port: 6379
+    password: ${redispass}
 
 logging:
   file:
