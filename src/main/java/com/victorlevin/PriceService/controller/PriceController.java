@@ -1,27 +1,24 @@
 package com.victorlevin.PriceService.controller;
 
 import com.victorlevin.PriceService.domain.Stock;
-import com.victorlevin.PriceService.dto.StockDto;
-import com.victorlevin.PriceService.dto.StockPricesDto;
-import com.victorlevin.PriceService.dto.TickersDto;
+import com.victorlevin.PriceService.dto.*;
 import com.victorlevin.PriceService.service.StockPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/price")
 public class PriceController {
     private final StockPriceService priceService;
 
-    @PostMapping("/getByTickers")
-    public StockPricesDto getStocksByTickers(@RequestBody TickersDto tickers) {
-        return priceService.getStocksByTickers(tickers);
+    @PostMapping("/prices")
+    public StockFigiesPricesDto getStocksByFigies(@RequestBody FigiesDto figiesDto) {
+        return priceService.getStocksByFigies(figiesDto);
     }
 
-    @GetMapping("/{ticker}")
-    public StockDto getPriceByTicker(@PathVariable String ticker) {
-        return priceService.getPriceByTicker(ticker);
+    @GetMapping("/{figi}")
+    public Stock getPriceByTicker(@PathVariable String figi) {
+        return priceService.getPriceByFigi(figi);
     }
 
     @PostMapping("/add")

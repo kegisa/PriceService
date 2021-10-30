@@ -18,4 +18,9 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDto> handleNotFound(Exception ex) {
         return new ResponseEntity<ErrorDto>(new ErrorDto(ex.getLocalizedMessage()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({TinkoffServiceException.class})
+    public ResponseEntity<ErrorDto> handleExceptionFromPriceService(Exception ex) {
+        return new ResponseEntity<ErrorDto>(new ErrorDto(ex.getLocalizedMessage()), HttpStatus.BAD_REQUEST);
+    }
 }

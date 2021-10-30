@@ -7,8 +7,8 @@ import lombok.Setter;
 import java.util.List;
 
 @NoArgsConstructor
-@Setter
 @Getter
-public class TickersDto {
-    private List<String> tickers;
+@Setter
+public class FigiesDto {
+    private List<String> figies;
 }
