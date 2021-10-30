@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 
 @AllArgsConstructor
-@RedisHash(value = "Stock", timeToLive = 100L)
+@RedisHash(value = "Stock", timeToLive = 60L)
 @Data
 public class Stock {
     @Id
