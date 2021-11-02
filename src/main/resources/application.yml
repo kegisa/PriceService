@@ -2,20 +2,21 @@ server:
   port: 8002
 
 api :
-  tinkoffService : 'http://localhost:8003'
+  tinkoffService : ${gcpTinkoffService}
   getPricesByFigies : /prices
 
 spring:
   redis:
-    host: 34.88.96.185
-    port: 6379
+    host: ${redishost}
+    port: ${redisport}
     password: ${redispass}
 
 logging:
-  file:
-    path: logs/PriceService.log
   level:
     root: INFO
+  file:
+    name: logs/PriceService.log
+
 
 springdoc:
   api-docs:
