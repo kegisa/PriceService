@@ -7,9 +7,9 @@ import org.springframework.data.redis.core.RedisHash;
 
 
 @AllArgsConstructor
-@RedisHash(value = "Stock", timeToLive = 60L)
+@RedisHash(value = "Stock")
 @Data
-public class Stock {
+public class FigiWithPrice {
     @Id
     private String figi;
     private Double price;

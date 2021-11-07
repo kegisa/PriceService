@@ -1,12 +1,11 @@
 package com.victorlevin.PriceService;
 
-import com.victorlevin.PriceService.config.ApiConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableConfigurationProperties(ApiConfig.class)
+@EnableFeignClients
 public class PriceServiceApplication {
 
 	public static void main(String[] args) {
