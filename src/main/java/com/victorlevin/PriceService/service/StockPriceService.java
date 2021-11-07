@@ -30,7 +30,7 @@ public class StockPriceService {
         return stockRepository.save(figiWithPrice);
     }
 
-    public StocksWithPrices getStocksByFigies(StocksDto stocksDto) {
+    public StocksWithPrices getPrices(StocksDto stocksDto) {
         long start = System.currentTimeMillis();
         List<StockWithPrice> result = new ArrayList<>();
         List<Stock> searchStockPrices = new ArrayList<>(stocksDto.getStocks());
@@ -41,9 +41,12 @@ public class StockPriceService {
         List<Stock> notFoundInRepo = searchStockPrices.stream()
                 .filter(s -> !foundedFigiesFromReddis.contains(s.getFigi())).collect(Collectors.toList());
 
-        List<StockWithPrice> fromApi = getPricesFromApi(notFoundInRepo);
-        result.addAll(fromApi);
-        saveToRedis(fromApi);
+        if(!notFoundInRepo.isEmpty()) {
+            List<StockWithPrice> fromApi = getPricesFromApi(notFoundInRepo);
+            result.addAll(fromApi);
+            saveToRedis(fromApi);
+        }
+
         checkAllOk(searchStockPrices, result);
         log.info("All time - {}", System.currentTimeMillis() - start);
         return new StocksWithPrices(result);
@@ -60,14 +63,17 @@ public class StockPriceService {
         if(!foundedFigies.isEmpty()) {
             Map<String, Double> figiWithPrice = foundedFigies.stream()
                     .collect(Collectors.toMap(FigiWithPrice::getFigi, FigiWithPrice::getPrice));
-            searchStockPrices.forEach(s -> stocksFromReddis.add(new StockWithPrice(s, figiWithPrice.get(s.getFigi()))));
+
+            searchStockPrices.stream()
+                    .filter(s -> figiWithPrice.containsKey(s.getFigi()))
+                    .forEach(s -> stocksFromReddis.add(new StockWithPrice(s, figiWithPrice.get(s.getFigi()))));
         }
         log.info("Time for getting from Reddis - {}", System.currentTimeMillis() - start);
         return stocksFromReddis;
     }
 
     private void saveToRedis(List<StockWithPrice> stocks) {
-        stockRepository.saveAll(stocks.stream().map(s -> new FigiWithPrice(s.getFigi(), s.getPrice())).collect(Collectors.toList()));
+        stockRepository.saveAll(stocks.stream().map(s -> new FigiWithPrice(s.getFigi(), s.getPrice(), s.getSource())).collect(Collectors.toList()));
     }
 
     private List<StockWithPrice> getPricesFromApi(List<Stock> notFoundInRepo) {

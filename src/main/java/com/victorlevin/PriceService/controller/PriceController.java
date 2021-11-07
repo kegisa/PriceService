@@ -13,7 +13,7 @@ public class PriceController {
 
     @PostMapping("/prices")
     public StocksWithPrices getStocksWithPrices(@RequestBody StocksDto stocksDto) {
-        return priceService.getStocksByFigies(stocksDto);
+        return priceService.getPrices(stocksDto);
     }
 
     @PostMapping("/add")

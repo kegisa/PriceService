@@ -13,4 +13,5 @@ public class FigiWithPrice {
     @Id
     private String figi;
     private Double price;
+    private String source;
 }
