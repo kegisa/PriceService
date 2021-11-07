@@ -1,6 +1,6 @@
 package com.victorlevin.PriceService.controller;
 
-import com.victorlevin.PriceService.domain.Stock;
+import com.victorlevin.PriceService.domain.FigiWithPrice;
 import com.victorlevin.PriceService.dto.*;
 import com.victorlevin.PriceService.service.StockPriceService;
 import lombok.RequiredArgsConstructor;
@@ -12,18 +12,13 @@ public class PriceController {
     private final StockPriceService priceService;
 
     @PostMapping("/prices")
-    public StockFigiesPricesDto getStocksByFigies(@RequestBody FigiesDto figiesDto) {
-        return priceService.getStocksByFigies(figiesDto);
-    }
-
-    @GetMapping("/{figi}")
-    public Stock getPriceByTicker(@PathVariable String figi) {
-        return priceService.getPriceByFigi(figi);
+    public StocksWithPrices getStocksWithPrices(@RequestBody StocksDto stocksDto) {
+        return priceService.getStocksByFigies(stocksDto);
     }
 
     @PostMapping("/add")
-    public Stock addStock(@RequestBody Stock stock) {
-        return priceService.addStock(stock);
+    public FigiWithPrice addStock(@RequestBody FigiWithPrice figiWithPrice) {
+        return priceService.addStock(figiWithPrice);
     }
 
 }

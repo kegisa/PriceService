@@ -1,9 +1,11 @@
 server:
-  port: 8002
+  port: 8003
 
 api :
-  tinkoffService : ${gcpTinkoffService}
-  getPricesByFigies : /prices
+  stockConfig :
+    stockService : ${gcpStockService}
+    getPrices : /stocks/prices
+
 
 spring:
   redis:

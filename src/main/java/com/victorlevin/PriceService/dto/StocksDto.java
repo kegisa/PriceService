@@ -1,7 +1,5 @@
 package com.victorlevin.PriceService.dto;
 
-
-import com.victorlevin.PriceService.domain.FigiWithPrice;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StockFigiesPricesDto {
-    private List<FigiWithPrice> prices;
+public class StocksDto {
+    List<Stock> stocks;
 }
